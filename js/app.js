@@ -8,13 +8,61 @@
 const gameBoard = document.querySelector('.game-board');
 //the click counter variable
 let clickCounter = 0;
+//cardFigures array contain figure and order pairs
+const cardFigures = [
+  [1, "anchor"],
+  [2, "anchor"],
+  [3, "crow"],
+  [4, "crow"],
+  [5, "bomb"],
+  [6, "bomb"],
+  [7, "gem"],
+  [8, "gem"],
+  [9, "fighter-jet"],
+  [10, "fighter-jet"],
+  [11, "key"],
+  [12, "key"],
+  [13, "gamepad"],
+  [14, "gamepad"],
+  [15, "balance-scale"],
+  [16, "balance-scale"]
+];
 
+
+//******************************//
+//*                            *//
+//*    Function Declaration    *//
+//*                            *//
+//******************************//
+
+function refreshGameBoard(evt) {
+  const codeFragment = document.createDocumentFragment();
+  cardFigures.sort(function(a, b){return 0.5 - Math.random()});
+  for (var i = 0; i < cardFigures.length; i++) {
+    const newElement = document.createElement('div');
+    newElement.setAttribute("class", "game-pieces-container");
+    newElement.innerHTML = `
+      <div class="game-pieces" style="order: ${cardFigures[i][0]}" data-piece="${cardFigures[i][1]}">
+        <div class="piece-front">
+        </div>
+        <div class="piece-back">
+            <i class="fas fa-${cardFigures[i][1]} fa-4x"></i>
+        </div>
+      </div>`;
+    codeFragment.appendChild(newElement);
+  }
+  gameBoard.innerHTML = "";
+  gameBoard.appendChild(codeFragment);
+}
 
 //******************************//
 //*                            *//
 //*          Listeners         *//
 //*                            *//
 //******************************//
+
+// TODO: call for first time the refreshGameBoard function to fill the game board with the game-pieces
+document.addEventListener("DOMContentLoaded", refreshGameBoard);
 
 // TODO: wait for click event on the GameBoard element and then flip the target card
 gameBoard.addEventListener("click", function(evt) {
