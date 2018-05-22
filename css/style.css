@@ -2,11 +2,13 @@
   margin: 0;
   padding: 0;
 }
+
 body {
   display: flex;
   justify-content: center;
   height: 100vh;
 }
+
 .game-board {
   display: flex;
   flex-wrap: wrap;
@@ -18,12 +20,14 @@ body {
   align-self: center;
   padding: 10px;
 }
+
 .game-pieces-container {
   display: flex;
   justify-content: center;
   width: 25%;
   height: 25%;
 }
+
 .game-pieces {
   position: relative;
   align-self: center;
@@ -32,9 +36,11 @@ body {
   transform-style: preserve-3d;
   transition: all 0.5s ease;
 }
+
 .game-pieces.flipped {
   transform: rotateY(180deg);
 }
+
 .game-pieces .piece-back {
   position: absolute;
   display: flex;
@@ -44,6 +50,7 @@ body {
   backface-visibility: hidden;
   transform: rotateY(180deg);
 }
+
 .game-pieces .piece-front {
   position: absolute;
   backface-visibility: hidden;
@@ -51,6 +58,7 @@ body {
   width: 100%;
   height: 100%;
 }
+
 .game-pieces .fas {
   align-self: center;
 }

@@ -6,8 +6,10 @@
 
 //The whole gameBoard
 const gameBoard = document.querySelector('.game-board');
+
 //the click counter variable
 let clickCounter = 0;
+
 //cardFigures array contain figure and order pairs
 const cardFigures = [
   [1, "anchor"],
@@ -27,6 +29,12 @@ const cardFigures = [
   [15, "balance-scale"],
   [16, "balance-scale"]
 ];
+
+//previousCardFlipped store the data-piece value from the first card flipped in the actual search
+let previousCardFlipped = "";
+
+//guessedCorreclty store the amount of pairs guessed
+let guessedCorreclty = 0;
 
 
 //******************************//
@@ -64,8 +72,10 @@ function refreshGameBoard(evt) {
 // TODO: call for first time the refreshGameBoard function to fill the game board with the game-pieces
 document.addEventListener("DOMContentLoaded", refreshGameBoard);
 
+
 // TODO: wait for click event on the GameBoard element and then flip the target card
 gameBoard.addEventListener("click", function(evt) {
+  console.log(clickCounter + " clicks");
   //just flip a card if there are 0 or 1 card flipped
   if(clickCounter <= 1) {
     //save the parent element of the target to work with it
@@ -75,6 +85,29 @@ gameBoard.addEventListener("click", function(evt) {
       //fliped the parentElement of the target card and add 1 to the click variable cause there was 1 succesful click
       triggerParent.classList.toggle('flipped');
       clickCounter ++;
+      //check if this is the first click of the actual search and save the data-piece value into previousCardFlipped
+      if(clickCounter === 1) {
+        previousCardFlipped = triggerParent.getAttribute("data-piece");
+      } else {
+        //if it is not the first click it means this is the second one and then we need to see if the previous and the actual data-piece are the same
+        if(previousCardFlipped === triggerParent.getAttribute("data-piece")) {
+          //clickCounter = 5 to prevent any actiuon until the settimeout function finish
+          clickCounter = 5;
+          //add the class guessed to those flipped card without the guessed class
+          let guessedCards = document.querySelectorAll('.game-pieces.flipped:not(.guessed)');
+          setTimeout(function(){
+            guessedCorreclty ++;
+            guessedCards.forEach(function(currentValue) {
+              currentValue.classList.add("guessed");
+            });
+            //set clickCounter to 0 to restart the counter and begin another search
+            clickCounter = 0;
+            if(guessedCorreclty === 8) {
+              alert("well done");
+            }
+          },1100);
+        }
+      }
     }
   }
   // if clickCounter == 2 we need to hide the flipped cards since no match was found
