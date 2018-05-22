@@ -5,20 +5,27 @@
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   height: 100vh;
 }
 
+.game-board,
+.info-panel {
+  max-width: 680px;
+  width: 85vw;
+  align-self: center;
+}
+
+/* Game Board */
+
 .game-board {
   display: flex;
   flex-wrap: wrap;
-  max-width: 680px;
-  max-height: 680px;
-  width: 85vw;
-  height: 85vw;
   background-color: red;
-  align-self: center;
   padding: 10px;
+  max-height: 680px;
+  height: 85vw;
 }
 
 .game-pieces-container {
@@ -61,4 +68,15 @@ body {
 
 .game-pieces .fas {
   align-self: center;
+}
+
+
+/* Info Panel */
+.info-panel {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  min-height: 30px;
+  background: yellow;
+  margin-bottom: 10px;
 }

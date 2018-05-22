@@ -7,9 +7,6 @@
 //The whole gameBoard
 const gameBoard = document.querySelector('.game-board');
 
-//the click counter variable
-let clickCounter = 0;
-
 //cardFigures array contain figure and order pairs
 const cardFigures = [
   [1, "anchor"],
@@ -30,11 +27,24 @@ const cardFigures = [
   [16, "balance-scale"]
 ];
 
+//the element who will contain the time counter
+const timerCounterElement = document.getElementById("timerCounter");
+
+//the click counter variable
+let clickCounter = 0;
+
 //previousCardFlipped store the data-piece value from the first card flipped in the actual search
 let previousCardFlipped = "";
 
 //guessedCorreclty store the amount of pairs guessed
 let guessedCorreclty = 0;
+
+//timerCounter will store the interval function who will run when the game is on
+let timerCounter;
+
+//Timer variable who store seconds and minutes
+let timerSeconds = 0;
+let timerMinutes = 0;
 
 
 //******************************//
@@ -62,6 +72,19 @@ function refreshGameBoard(evt) {
   gameBoard.innerHTML = "";
   gameBoard.appendChild(codeFragment);
 }
+
+
+timerCounter = setInterval(function() {
+  //if second are less than 58 seconds grow, but if are 59 then next second make minutes to grow and seconds to reset to 0,
+  if(timerSeconds <= 58) {
+    timerSeconds ++;
+  } else {
+    timerMinutes ++;
+    timerSeconds = 0;
+  }
+  //print the mm:ss format of the actual time
+  timerCounterElement.textContent = ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2);
+}, 1000);
 
 //******************************//
 //*                            *//
@@ -103,9 +126,10 @@ gameBoard.addEventListener("click", function(evt) {
             //set clickCounter to 0 to restart the counter and begin another search
             clickCounter = 0;
             if(guessedCorreclty === 8) {
-              alert("well done");
+              clearInterval(timerCounter);
+              alert("well done u finish on " + ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2));
             }
-          },1100);
+          },700);
         }
       }
     }
@@ -121,6 +145,6 @@ gameBoard.addEventListener("click", function(evt) {
         currentValue.className = "game-pieces";
       });
       clickCounter = 0;
-    }, 1200);
+    }, 700);
   }
 });
