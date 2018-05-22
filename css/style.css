@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+.game-board {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 680px;
+  max-height: 680px;
+  width: 85vw;
+  height: 85vw;
+  background-color: red;
+  align-self: center;
+  padding: 10px;
+}
+.game-pieces-container {
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  height: 25%;
+}
+.game-pieces {
+  align-self: center;
+  width: 92%;
+  height: 92%;
+  background-color: blue;
+}
