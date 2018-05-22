@@ -7,6 +7,12 @@
 //The whole gameBoard
 const gameBoard = document.querySelector('.game-board');
 
+//the element who will contain the time counter
+const timerCounterElement = document.getElementById("timerCounter");
+
+//
+const moveCounterElement = document.getElementById("moveContainer");
+
 //cardFigures array contain figure and order pairs
 const cardFigures = [
   [1, "anchor"],
@@ -27,10 +33,11 @@ const cardFigures = [
   [16, "balance-scale"]
 ];
 
-//the element who will contain the time counter
-const timerCounterElement = document.getElementById("timerCounter");
 
-//the click counter variable
+// the click counter for the actual gamepad
+let clickFullCounter =0;
+
+//the click counter variable in the aactual search
 let clickCounter = 0;
 
 //previousCardFlipped store the data-piece value from the first card flipped in the actual search
@@ -108,6 +115,8 @@ gameBoard.addEventListener("click", function(evt) {
       //fliped the parentElement of the target card and add 1 to the click variable cause there was 1 succesful click
       triggerParent.classList.toggle('flipped');
       clickCounter ++;
+      clickFullCounter ++;
+      moveCounterElement.textContent = "Moves: " + clickFullCounter;
       //check if this is the first click of the actual search and save the data-piece value into previousCardFlipped
       if(clickCounter === 1) {
         previousCardFlipped = triggerParent.getAttribute("data-piece");
