@@ -6,11 +6,9 @@
 
 //The whole gameBoard
 const gameBoard = document.querySelector('.game-board');
-
 //the element who will contain the time counter
 const timerCounterElement = document.getElementById("timerCounter");
-
-//
+//the element who will store all the moves in the actual game
 const moveCounterElement = document.getElementById("moveContainer");
 
 //cardFigures array contain figure and order pairs
@@ -36,22 +34,31 @@ const cardFigures = [
 
 // the click counter for the actual gamepad
 let clickFullCounter =0;
-
 //the click counter variable in the aactual search
 let clickCounter = 0;
 
 //previousCardFlipped store the data-piece value from the first card flipped in the actual search
 let previousCardFlipped = "";
-
 //guessedCorreclty store the amount of pairs guessed
 let guessedCorreclty = 0;
 
 //timerCounter will store the interval function who will run when the game is on
 let timerCounter;
-
 //Timer variable who store seconds and minutes
 let timerSeconds = 0;
 let timerMinutes = 0;
+
+
+//******************************//
+//*                            *//
+//*        Game Options        *//
+//*                            *//
+//******************************//
+
+//the moves needed to get the stars
+let threeStars = 20;
+let twoStars = 35;
+let oneStars = 50;
 
 
 //******************************//
@@ -80,6 +87,15 @@ function refreshGameBoard(evt) {
   gameBoard.appendChild(codeFragment);
 }
 
+function starsRating() {
+  if(clickFullCounter === 51) {
+    document.getElementById("firstStar").className = "far fa-star";
+  } else if(clickFullCounter === 36) {
+    document.getElementById("secondStar").className = "far fa-star";
+  } else if(clickFullCounter === 21) {
+    document.getElementById("thirdStar").className = "far fa-star";
+  }
+}
 
 timerCounter = setInterval(function() {
   //if second are less than 58 seconds grow, but if are 59 then next second make minutes to grow and seconds to reset to 0,
@@ -116,6 +132,7 @@ gameBoard.addEventListener("click", function(evt) {
       triggerParent.classList.toggle('flipped');
       clickCounter ++;
       clickFullCounter ++;
+      starsRating();
       moveCounterElement.textContent = "Moves: " + clickFullCounter;
       //check if this is the first click of the actual search and save the data-piece value into previousCardFlipped
       if(clickCounter === 1) {
