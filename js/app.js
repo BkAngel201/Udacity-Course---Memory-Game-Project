@@ -4,27 +4,26 @@ let clickCounter = 0;
 
 
 gameBoard.addEventListener("click", function(evt) {
-  let clickedCard;
-  let triggerParent = evt.target.parentElement;
-  if(triggerParent.className == "piece-back") {
-    clickedCard = triggerParent.parentElement;
-  } else {
-    clickedCard = triggerParent;
-  }
-  if(clickedCard.className == 'game-pieces') {
-    clickedCard.classList.toggle('flipped');
-    clickCounter++;
-  }
 
+  if(clickCounter <= 1) {
+    let triggerParent = evt.target.parentElement;
+
+    if(triggerParent.className == 'game-pieces') {
+      triggerParent.classList.toggle('flipped');
+      console.log("Inicio-" + clickCounter);
+      clickCounter ++;
+      console.log("Resultado-" + clickCounter);
+    }
+  }
   if(clickCounter === 2) {
-    clickCounter = 0;
+    clickCounter = 5;
     let flippedCards = document.querySelectorAll('.game-pieces.flipped:not(.guessed)');
-    setInterval(function (){
+    setTimeout(function (){
       flippedCards.forEach(function(currentValue) {
         currentValue.className = "game-pieces";
       });
-    }, 2000);
-    console.log(flippedCards);
+      clickCounter = 0;
+      console.log("Final-" + clickCounter);
+    }, 1200);
   }
-
 });
