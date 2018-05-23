@@ -33,7 +33,7 @@ const cardFigures = [
 
 
 // the click counter for the actual gamepad
-let clickFullCounter =0;
+let completeMovesCounter = 0;
 //the click counter variable in the aactual search
 let clickCounter = 0;
 
@@ -56,9 +56,9 @@ let timerMinutes = 0;
 //******************************//
 
 //the moves needed to get the stars
-let threeStars = 20;
-let twoStars = 35;
-let oneStars = 50;
+let threeStars = 16;
+let twoStars = 30;
+let oneStars = 40;
 
 
 //******************************//
@@ -88,11 +88,13 @@ function refreshGameBoard(evt) {
 }
 
 function starsRating() {
-  if(clickFullCounter === 51) {
+  completeMovesCounter ++;
+  moveCounterElement.textContent = "Moves: " + completeMovesCounter;
+  if(completeMovesCounter === oneStars) {
     document.getElementById("firstStar").className = "far fa-star";
-  } else if(clickFullCounter === 36) {
+  } else if(completeMovesCounter === twoStars) {
     document.getElementById("secondStar").className = "far fa-star";
-  } else if(clickFullCounter === 21) {
+  } else if(completeMovesCounter === threeStars) {
     document.getElementById("thirdStar").className = "far fa-star";
   }
 }
@@ -131,9 +133,6 @@ gameBoard.addEventListener("click", function(evt) {
       //fliped the parentElement of the target card and add 1 to the click variable cause there was 1 succesful click
       triggerParent.classList.toggle('flipped');
       clickCounter ++;
-      clickFullCounter ++;
-      starsRating();
-      moveCounterElement.textContent = "Moves: " + clickFullCounter;
       //check if this is the first click of the actual search and save the data-piece value into previousCardFlipped
       if(clickCounter === 1) {
         previousCardFlipped = triggerParent.getAttribute("data-piece");
@@ -151,6 +150,7 @@ gameBoard.addEventListener("click", function(evt) {
             });
             //set clickCounter to 0 to restart the counter and begin another search
             clickCounter = 0;
+            starsRating();
             if(guessedCorreclty === 8) {
               clearInterval(timerCounter);
               alert("well done u finish on " + ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2));
@@ -170,6 +170,7 @@ gameBoard.addEventListener("click", function(evt) {
       flippedCards.forEach(function(currentValue) {
         currentValue.className = "game-pieces";
       });
+      starsRating();
       clickCounter = 0;
     }, 700);
   }
