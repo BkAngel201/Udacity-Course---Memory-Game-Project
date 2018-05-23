@@ -10,6 +10,12 @@ const gameBoard = document.querySelector('.game-board');
 const timerCounterElement = document.getElementById("timerCounter");
 //the element who will store all the moves in the actual game
 const moveCounterElement = document.getElementById("moveContainer");
+//the element who will store the stars for the rating
+const starsRatingElement = document.getElementById("starsRating");
+//the modal element that will popup when the game is finished
+const modalElement = document.getElementById("modal-winner");
+//
+const resetGameButtonElement = document.getElementById("resetGameButton");
 
 //cardFigures array contain figure and order pairs
 const cardFigures = [
@@ -49,6 +55,7 @@ let timerSeconds = 0;
 let timerMinutes = 0;
 
 
+
 //******************************//
 //*                            *//
 //*        Game Options        *//
@@ -83,8 +90,37 @@ function refreshGameBoard(evt) {
       </div>`;
     codeFragment.appendChild(newElement);
   }
+  //set all default HTML inside the Elements
   gameBoard.innerHTML = "";
   gameBoard.appendChild(codeFragment);
+  starsRatingElement.innerHTML = `
+  <i class="fas fa-star fa-2x" id="firstStar"></i>
+  <i class="fas fa-star fa-2x" id="secondStar"></i>
+  <i class="fas fa-star fa-2x" id="thirdStar"></i>`;
+
+  moveCounterElement.textContent = "moves: 0";
+
+  modalElement.className = "modal";
+
+  //set all the variables to initials values
+  completeMovesCounter = 0;
+  previousCardFlipped = "";
+  guessedCorreclty = 0;
+  clickCounter = 0;
+  timerSeconds = 0;
+  timerMinutes = 0;
+
+  timerCounter = setInterval(function() {
+    //if second are less than 58 seconds grow, but if are 59 then next second make minutes to grow and seconds to reset to 0,
+    if(timerSeconds <= 58) {
+      timerSeconds ++;
+    } else {
+      timerMinutes ++;
+      timerSeconds = 0;
+    }
+    //print the mm:ss format of the actual time
+    timerCounterElement.textContent = ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2);
+  }, 1000);
 }
 
 function starsRating() {
@@ -99,17 +135,7 @@ function starsRating() {
   }
 }
 
-timerCounter = setInterval(function() {
-  //if second are less than 58 seconds grow, but if are 59 then next second make minutes to grow and seconds to reset to 0,
-  if(timerSeconds <= 58) {
-    timerSeconds ++;
-  } else {
-    timerMinutes ++;
-    timerSeconds = 0;
-  }
-  //print the mm:ss format of the actual time
-  timerCounterElement.textContent = ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2);
-}, 1000);
+
 
 //******************************//
 //*                            *//
@@ -119,6 +145,10 @@ timerCounter = setInterval(function() {
 
 // TODO: call for first time the refreshGameBoard function to fill the game board with the game-pieces
 document.addEventListener("DOMContentLoaded", refreshGameBoard);
+
+
+// TODO: call the refreshGameBoard function to restart the game
+resetGameButtonElement.addEventListener("click", refreshGameBoard);
 
 
 // TODO: wait for click event on the GameBoard element and then flip the target card
@@ -144,7 +174,6 @@ gameBoard.addEventListener("click", function(evt) {
           //add the class guessed to those flipped card without the guessed class
           let guessedCards = document.querySelectorAll('.game-pieces.flipped:not(.guessed)');
           setTimeout(function(){
-
             //since this convination is correct guessedcorrectly add 1
             guessedCorreclty ++;
             guessedCards.forEach(function(currentValue) {
@@ -157,7 +186,9 @@ gameBoard.addEventListener("click", function(evt) {
             //when guessedCorrectly is equal to the maximun pair possible the game is over
             if(guessedCorreclty === 8) {
               clearInterval(timerCounter);
-              alert("well done u finish on " + ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2));
+              modalElement.classList.add("active");
+              modalElement.querySelector("h3").textContent = "Your Time: " + ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2);
+              modalElement.querySelector(".star-rating-container").innerHTML = starsRatingElement.innerHTML;
             }
           },500);
         } else {
