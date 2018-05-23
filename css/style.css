@@ -8,6 +8,7 @@ body {
   flex-direction: column;
   justify-content: center;
   height: 100vh;
+  background-color: #455a64
 }
 
 .game-board,
@@ -22,10 +23,30 @@ body {
 .game-board {
   display: flex;
   flex-wrap: wrap;
-  background-color: red;
-  padding: 10px;
+  background-color: #795548;
+  padding: 5px 10px 10px 5px;
   max-height: 680px;
   height: 85vw;
+  border-radius: 10px;
+  box-shadow: 1px 1px 0px #4b2c20,
+              2px 2px 0px #4b2c20,
+              3px 3px 0px #4b2c20,
+              4px 4px 0px #795548,
+              5px 5px 0px #795548,
+              6px 6px 0px #795548,
+              7px 7px 0px #4b2c20,
+              8px 8px 0px #795548,
+              9px 9px 0px #a98274,
+              10px 10px 0px #795548,
+              11px 11px 0px #4b2c20,
+              12px 12px 0px #795548,
+              13px 13px 0px #4b2c20,
+              14px 14px 0px #795548,
+              15px 15px 0px #795548,
+              16px 16px 0px #4b2c20,
+              17px 17px 0px #4b2c20,
+              18px 18px 10px #333,
+              19px 19px 20px #333;
 }
 
 .game-pieces-container {
@@ -51,6 +72,10 @@ body {
 .game-pieces.flipped.guessed {
   transform: rotateY(180deg);
 }
+.game-pieces.flipped.guessed .piece-back {
+  background: #2e7d32;
+  transition: all 0.2s ease;
+}
 
 .game-pieces .piece-back {
   position: absolute;
@@ -60,14 +85,27 @@ body {
   height: 100%;
   backface-visibility: hidden;
   transform: rotateY(180deg);
+  background: #707070;
 }
 
 .game-pieces .piece-front {
   position: absolute;
   backface-visibility: hidden;
-  background: blue;
+  background: #484848;
   width: 100%;
   height: 100%;
+}
+
+.game-pieces .piece-front,
+.game-pieces .piece-back {
+  border-radius: 5px;
+  box-shadow: 1px 1px 0px #000000,
+              2px 2px 0px #000000,
+              3px 3px 0px #212121,
+              4px 4px 0px #212121,
+              5px 5px 0px #212121,
+              6px 6px 0px #000000,
+              7px 7px 0px #000000;
 }
 
 .game-pieces .fas {
