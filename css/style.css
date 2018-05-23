@@ -73,12 +73,12 @@ body {
 
 .game-pieces.flipped.wrong .piece-back {
   background: #ff616f;
-  transition: all 0.2s ease;
+  animation: error 0.2s linear 1;
 }
 
 .game-pieces.flipped.guessed .piece-back {
   background: #2e7d32;
-  transition: all 0.2s ease;
+  animation: success 0.25s linear 1;
 }
 
 .game-pieces .piece-back {
@@ -234,4 +234,16 @@ body {
 @keyframes spin {
   from {transform: rotate(0deg) scale(1.2);}
   to   {transform: rotate(360deg) scale(1.2);}
+}
+
+@keyframes success {
+  50%   {transform: scale(1.08) rotateY(180deg);}
+  100%  {transform: scale(1) rotateY(180deg);}
+}
+
+@keyframes error {
+  25%   {transform: rotate(5deg) rotateY(180deg);}
+  50%  {transform: rotate(-5deg) rotateY(180deg);}
+  75%   {transform: rotate(-5deg) rotateY(180deg);}
+  100%  {transform: rotate(5deg) rotateY(180deg);}
 }
