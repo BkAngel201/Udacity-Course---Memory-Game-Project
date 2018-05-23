@@ -13,7 +13,7 @@ const moveCounterElement = document.getElementById("moveContainer");
 //the element who will store the stars for the rating
 const starsRatingElement = document.getElementById("starsRating");
 //the modal element that will popup when the game is finished
-const modalElement = document.getElementById("modal-winner");
+const modalElement = document.getElementById("modalWinner");
 //this element allows the user start new game from the winning modal
 const resetGameButtonElement = document.getElementById("resetGameButton");
 //this element allows the user start new game from the winning modal
