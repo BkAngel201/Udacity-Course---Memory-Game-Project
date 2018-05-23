@@ -187,7 +187,8 @@ gameBoard.addEventListener("click", function(evt) {
             if(guessedCorreclty === 8) {
               clearInterval(timerCounter);
               modalElement.classList.add("active");
-              modalElement.querySelector("h3").textContent = "Your Time: " + ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2);
+              modalElement.querySelector("#yourTime").textContent = "Your Time: " + ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2);
+              modalElement.querySelector("#yourMoves").textContent = "Your Moves: " + completeMovesCounter;
               modalElement.querySelector(".star-rating-container").innerHTML = starsRatingElement.innerHTML;
             }
           },500);
