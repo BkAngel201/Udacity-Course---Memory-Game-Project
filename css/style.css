@@ -119,6 +119,7 @@ body {
 
 /* Info Panel */
 .info-panel {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -157,6 +158,23 @@ body {
                3px 3px 0px #333;
   font-size: 1.5em;
   text-transform: uppercase;
+}
+
+.info-panel a#resetInGameButton {
+  position: absolute;
+  right: -1%;
+  top: 30%;
+  color: white;
+  text-shadow: 1px 1px 0px #777,
+               2px 2px 0px #555,
+               3px 3px 0px #333;
+}
+
+.info-panel a#resetInGameButton:hover {
+  text-shadow: 1px 1px 0px #777,
+               2px 2px 0px #333;
+  animation: spin 1.5s linear infinite;
+  cursor: pointer;
 }
 
 
@@ -209,4 +227,11 @@ body {
   background: #006064;
   transform: scale(1.2);
   cursor: pointer;
+}
+
+
+/* Animations */
+@keyframes spin {
+  from {transform: rotate(0deg) scale(1.2);}
+  to   {transform: rotate(360deg) scale(1.2);}
 }

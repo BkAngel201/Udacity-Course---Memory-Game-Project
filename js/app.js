@@ -14,8 +14,10 @@ const moveCounterElement = document.getElementById("moveContainer");
 const starsRatingElement = document.getElementById("starsRating");
 //the modal element that will popup when the game is finished
 const modalElement = document.getElementById("modal-winner");
-//
+//this element allows the user start new game from the winning modal
 const resetGameButtonElement = document.getElementById("resetGameButton");
+//this element allows the user start new game from the winning modal
+const resetInGameButtonElement = document.getElementById("resetInGameButton");
 
 //cardFigures array contain figure and order pairs
 const cardFigures = [
@@ -75,6 +77,7 @@ let oneStars = 40;
 //******************************//
 
 function refreshGameBoard(evt) {
+  clearInterval(timerCounter);
   const codeFragment = document.createDocumentFragment();
   cardFigures.sort(function(a, b){return 0.5 - Math.random()});
   for (var i = 0; i < cardFigures.length; i++) {
@@ -97,6 +100,8 @@ function refreshGameBoard(evt) {
   <i class="fas fa-star fa-2x" id="firstStar"></i>
   <i class="fas fa-star fa-2x" id="secondStar"></i>
   <i class="fas fa-star fa-2x" id="thirdStar"></i>`;
+
+  timerCounterElement.textContent = "00:00";
 
   moveCounterElement.textContent = "moves: 0";
 
@@ -147,8 +152,11 @@ function starsRating() {
 document.addEventListener("DOMContentLoaded", refreshGameBoard);
 
 
-// TODO: call the refreshGameBoard function to restart the game
+// TODO: call the refreshGameBoard function to restart the game on winning modal
 resetGameButtonElement.addEventListener("click", refreshGameBoard);
+
+// TODO: call the refreshGameBoard function to restart the game on actual game
+resetInGameButtonElement.addEventListener("click", refreshGameBoard);
 
 
 // TODO: wait for click event on the GameBoard element and then flip the target card
