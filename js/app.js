@@ -99,7 +99,17 @@ function starsRating() {
   }
 }
 
-
+timerCounter = setInterval(function() {
+  //if second are less than 58 seconds grow, but if are 59 then next second make minutes to grow and seconds to reset to 0,
+  if(timerSeconds <= 58) {
+    timerSeconds ++;
+  } else {
+    timerMinutes ++;
+    timerSeconds = 0;
+  }
+  //print the mm:ss format of the actual time
+  timerCounterElement.textContent = ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2);
+}, 1000);
 
 //******************************//
 //*                            *//

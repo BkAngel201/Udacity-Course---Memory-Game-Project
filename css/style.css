@@ -165,7 +165,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  display: flex;
+  display: none;
   justify-content: center;
   flex-direction: column;
   width: 100vw;
