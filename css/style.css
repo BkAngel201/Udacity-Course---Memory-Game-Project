@@ -69,9 +69,11 @@ body {
   transform: rotateY(180deg);
 }
 
-.game-pieces.flipped.guessed {
-  transform: rotateY(180deg);
+.game-pieces.flipped.wrong .piece-back {
+  background: #ff616f;
+  transition: all 0.2s ease;
 }
+
 .game-pieces.flipped.guessed .piece-back {
   background: #2e7d32;
   transition: all 0.2s ease;

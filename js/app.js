@@ -90,11 +90,11 @@ function refreshGameBoard(evt) {
 function starsRating() {
   completeMovesCounter ++;
   moveCounterElement.textContent = "Moves: " + completeMovesCounter;
-  if(completeMovesCounter === oneStars) {
+  if(completeMovesCounter === oneStars + 1) {
     document.getElementById("firstStar").className = "far fa-star";
-  } else if(completeMovesCounter === twoStars) {
+  } else if(completeMovesCounter === twoStars + 1) {
     document.getElementById("secondStar").className = "far fa-star";
-  } else if(completeMovesCounter === threeStars) {
+  } else if(completeMovesCounter === threeStars + 1) {
     document.getElementById("thirdStar").className = "far fa-star";
   }
 }
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", refreshGameBoard);
 
 // TODO: wait for click event on the GameBoard element and then flip the target card
 gameBoard.addEventListener("click", function(evt) {
-  console.log(clickCounter + " clicks");
+  console.log(previousCardFlipped);
   //just flip a card if there are 0 or 1 card flipped
   if(clickCounter <= 1) {
     //save the parent element of the target to work with it
@@ -155,7 +155,20 @@ gameBoard.addEventListener("click", function(evt) {
               clearInterval(timerCounter);
               alert("well done u finish on " + ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2));
             }
-          },700);
+          },500);
+        } else {
+          //clickCounter = 5 to prevent any actiuon until the settimeout function finish
+          clickCounter = 5;
+          //add the class wrong to those flipped card who are flipped
+          let wrongCards = document.querySelectorAll('.game-pieces.flipped:not(.guessed)');
+          setTimeout(function(){
+            wrongCards.forEach(function(currentValue) {
+              currentValue.classList.add("wrong");
+            });
+            starsRating();
+          },300);
+          //set clickCounter to 2 to let the next step flipped back the cards
+          clickCounter = 2;
         }
       }
     }
@@ -172,6 +185,6 @@ gameBoard.addEventListener("click", function(evt) {
       });
       starsRating();
       clickCounter = 0;
-    }, 700);
+    }, 900);
   }
 });
