@@ -144,13 +144,17 @@ gameBoard.addEventListener("click", function(evt) {
           //add the class guessed to those flipped card without the guessed class
           let guessedCards = document.querySelectorAll('.game-pieces.flipped:not(.guessed)');
           setTimeout(function(){
+
+            //since this convination is correct guessedcorrectly add 1
             guessedCorreclty ++;
             guessedCards.forEach(function(currentValue) {
               currentValue.classList.add("guessed");
             });
             //set clickCounter to 0 to restart the counter and begin another search
             clickCounter = 0;
+            //update the star rating and moves
             starsRating();
+            //when guessedCorrectly is equal to the maximun pair possible the game is over
             if(guessedCorreclty === 8) {
               clearInterval(timerCounter);
               alert("well done u finish on " + ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2));
@@ -159,12 +163,13 @@ gameBoard.addEventListener("click", function(evt) {
         } else {
           //clickCounter = 5 to prevent any actiuon until the settimeout function finish
           clickCounter = 5;
-          //add the class wrong to those flipped card who are flipped
+          //add the class wrong to the cards who are flipped
           let wrongCards = document.querySelectorAll('.game-pieces.flipped:not(.guessed)');
           setTimeout(function(){
             wrongCards.forEach(function(currentValue) {
               currentValue.classList.add("wrong");
             });
+            //update the star rating and moves
             starsRating();
           },300);
           //set clickCounter to 2 to let the next step flipped back the cards
@@ -183,7 +188,6 @@ gameBoard.addEventListener("click", function(evt) {
       flippedCards.forEach(function(currentValue) {
         currentValue.className = "game-pieces";
       });
-      starsRating();
       clickCounter = 0;
     }, 900);
   }
