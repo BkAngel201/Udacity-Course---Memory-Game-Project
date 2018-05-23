@@ -32,16 +32,16 @@ body {
               2px 2px 0px #4b2c20,
               3px 3px 0px #4b2c20,
               4px 4px 0px #795548,
-              5px 5px 0px #795548,
+              5px 5px 0px #4b2c20,
               6px 6px 0px #795548,
               7px 7px 0px #4b2c20,
               8px 8px 0px #795548,
-              9px 9px 0px #a98274,
+              9px 9px 0px #4b2c20,
               10px 10px 0px #795548,
               11px 11px 0px #4b2c20,
               12px 12px 0px #795548,
               13px 13px 0px #4b2c20,
-              14px 14px 0px #795548,
+              14px 14px 0px #4b2c20,
               15px 15px 0px #795548,
               16px 16px 0px #4b2c20,
               17px 17px 0px #4b2c20,
@@ -114,13 +114,44 @@ body {
   align-self: center;
 }
 
-
 /* Info Panel */
 .info-panel {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
   padding: 0 10px;
   min-height: 30px;
-  background: yellow;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.info-panel .star-rating-container,
+.info-panel .timer-container {
+  min-width: 90px;
+}
+
+.info-panel .fa-star {
+  color: #fdd835;
+  text-shadow: 1px 1px 0px #333,
+               2px 2px 0px #333,
+               3px 3px 0px #222;
+  margin-right: 0.2em;
+}
+
+.info-panel .far.fa-star {
+  font-size: 1.5em;
+  color: #b1b1b1;
+  text-shadow: 1px 1px 0px #333,
+               2px 2px 0px #333,
+               3px 3px 0px #222;
+}
+
+.info-panel .timer-container,
+.info-panel .moves-container {
+  font-family: 'Nova Square', cursive;
+  color: white;
+  text-shadow: 1px 1px 0px #777,
+               2px 2px 0px #555,
+               3px 3px 0px #333;
+  font-size: 1.5em;
+  text-transform: uppercase;
 }
