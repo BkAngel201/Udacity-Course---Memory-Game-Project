@@ -27,7 +27,7 @@ At the beginning of the game all the cards will be face down, then you need to f
 
 ## Upcoming Features
 
- - Global Leaderoard
+ - Global Leaderboard
 
 
 
