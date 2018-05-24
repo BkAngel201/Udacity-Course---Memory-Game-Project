@@ -13,11 +13,15 @@ const moveCounterElement = document.getElementById("moveContainer");
 //the element who will store the stars for the rating
 const starsRatingElement = document.getElementById("starsRating");
 //the modal element that will popup when the game is finished
-const modalElement = document.getElementById("modalWinner");
+const modalWinnerElement = document.getElementById("modalWinner");
+//the modal element that will popup to show the leaderboard
+const modalLeaderboardElement = document.getElementById("modalLeaderboard");
 //this element allows the user start new game from the winning modal
 const resetGameButtonElement = document.getElementById("resetGameButton");
 //this element allows the user start new game from the winning modal
 const resetInGameButtonElement = document.getElementById("resetInGameButton");
+//this element allows the user see the leaderboard
+const leaderboardButtonElement = document.getElementById("leaderboardButton");
 
 //cardFigures array contain figure and order pairs
 const cardFigures = [
@@ -105,7 +109,7 @@ function refreshGameBoard(evt) {
 
   moveCounterElement.textContent = "moves: 0";
 
-  modalElement.className = "modal";
+  modalWinnerElement.className = "modal";
 
   //set all the variables to initials values
   completeMovesCounter = 0;
@@ -151,12 +155,18 @@ function starsRating() {
 // TODO: call for first time the refreshGameBoard function to fill the game board with the game-pieces
 document.addEventListener("DOMContentLoaded", refreshGameBoard);
 
-
 // TODO: call the refreshGameBoard function to restart the game on winning modal
 resetGameButtonElement.addEventListener("click", refreshGameBoard);
 
 // TODO: call the refreshGameBoard function to restart the game on actual game
 resetInGameButtonElement.addEventListener("click", refreshGameBoard);
+
+// TODO: show the modal with the leaderboard
+leaderboardButtonElement.addEventListener("click", function() {
+  modalLeaderboardElement.classList.add("active");
+});
+
+
 
 
 // TODO: wait for click event on the GameBoard element and then flip the target card
@@ -194,10 +204,10 @@ gameBoard.addEventListener("click", function(evt) {
             //when guessedCorrectly is equal to the maximun pair possible the game is over
             if(guessedCorreclty === 8) {
               clearInterval(timerCounter);
-              modalElement.classList.add("active");
-              modalElement.querySelector("#yourTime").textContent = "Your Time: " + ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2);
-              modalElement.querySelector("#yourMoves").textContent = "Your Moves: " + completeMovesCounter;
-              modalElement.querySelector(".star-rating-container").innerHTML = starsRatingElement.innerHTML;
+              modalWinnerElement.classList.add("active");
+              modalWinnerElement.querySelector("#yourTime").textContent = "Your Time: " + ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2);
+              modalWinnerElement.querySelector("#yourMoves").textContent = "Your Moves: " + completeMovesCounter;
+              modalWinnerElement.querySelector(".star-rating-container").innerHTML = starsRatingElement.innerHTML;
             }
           },500);
         } else {

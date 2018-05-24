@@ -208,11 +208,18 @@ body {
   margin-bottom: 20px;
 }
 
+/* modal Winner */
 .modal h2 {
   margin-bottom: 20px;
 }
 .modal h3 {
   margin-bottom: 10px;
+}
+
+.modal .button-container {
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .modal button {
@@ -227,6 +234,91 @@ body {
   background: #006064;
   transform: scale(1.2);
   cursor: pointer;
+}
+
+.modal button.leaderboard {
+  background: #8f0042;
+  border-color: #9b0101;
+}
+
+.modal button.leaderboard:hover {
+  background: #64002a;
+}
+
+/* modal ScoreRating */
+.modal .score-rating-container {
+  max-width: 500px;
+  width: 70vw;
+  padding-bottom: 20px;
+}
+
+.modal .score-rating-container .divider {
+  height: 1px;
+  width: 100%;
+  background-color: #795548;
+  box-shadow: 1px 1px 0px #4b2c20,
+              2px 2px 0px #4b2c20,
+              3px 3px 4px #333,
+              4px 4px 8px #333;
+  margin-bottom: 10px;
+}
+
+.modal .score-rating-container .fas {
+  margin-bottom: 6px;
+}
+
+.modal .score-rating-container .score-rating-header,
+.modal .score-rating-container .score-rating-body,
+.modal .score-rating-container .player-row {
+  display: flex;
+}
+
+.modal .score-rating-container .name-column,
+.modal .score-rating-container .time-column {
+  width: 50%;
+  padding: 5px 30px;
+  text-align: center;
+}
+
+.modal .score-rating-container .score-rating-header,
+.modal .score-rating-container .player-row {
+  color: white;
+  text-shadow: 1px 1px 0px #555,
+               2px 2px 0px #444,
+               3px 3px 0px #333;
+}
+
+.modal .score-rating-container .score-rating-header {
+  font-size: 1.4em;
+  background-color: #795548;
+  box-shadow: 1px 1px 0px #4b2c20,
+              2px 2px 0px #4b2c20,
+              3px 3px 0px #795548,
+              4px 4px 0px #4b2c20,
+              5px 5px 0px #4b2c20,
+              6px 6px 5px #333,
+              7px 7px 10px #333;
+  margin-bottom: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.modal .score-rating-container .player-row {
+  width: 100%;
+  background-color: #906b5e;
+  box-shadow: 1px 1px 0px #795548,
+              2px 2px 0px #795548,
+              3px 3px 0px #906b5e,
+              4px 4px 0px #795548,
+              5px 5px 0px #795548,
+              6px 6px 5px #333,
+              7px 7px 10px #333;
+  margin-bottom: 15px;
+}
+
+.modal .score-rating-container .score-rating-body {
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 
