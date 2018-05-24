@@ -34,3 +34,6 @@ At the beginning of the game all the cards will be face down, then you need to f
 ## Known Issues
 
  - Animations do not work properly on Safari.
+
+## Live Link
+[Memory Game](https://rawgit.com/BkAngel201/Udacity-Course---Memory-Game-Project/master/index.html)
