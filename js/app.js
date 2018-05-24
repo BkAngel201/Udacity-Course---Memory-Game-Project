@@ -16,6 +16,8 @@ const starsRatingElement = document.getElementById("starsRating");
 const modalWinnerElement = document.getElementById("modalWinner");
 //the modal element that will popup to show the leaderboard
 const modalLeaderboardElement = document.getElementById("modalLeaderboard");
+//this element will close the leader board modal
+const leaderboardCloseButtonElement = document.getElementById("leaderboardCloseButton");
 //this element allows the user start new game from the winning modal
 const resetGameButtonElement = document.getElementById("resetGameButton");
 //this element allows the user start new game from the winning modal
@@ -166,7 +168,10 @@ leaderboardButtonElement.addEventListener("click", function() {
   modalLeaderboardElement.classList.add("active");
 });
 
-
+// TODO: close the modal with the leaderboardButton
+leaderboardCloseButtonElement.addEventListener("click", function() {
+  modalLeaderboardElement.className = "modal";
+});
 
 
 // TODO: wait for click event on the GameBoard element and then flip the target card

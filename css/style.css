@@ -247,6 +247,7 @@ body {
 
 /* modal ScoreRating */
 .modal .score-rating-container {
+  position: relative;
   max-width: 500px;
   width: 70vw;
   padding-bottom: 20px;
@@ -319,6 +320,19 @@ body {
 .modal .score-rating-container .score-rating-body {
   flex-direction: column;
   margin-bottom: 20px;
+}
+
+.modal .close-button {
+  position: absolute;
+  right: -30px;
+}
+
+.modal .close-button .fas {
+  color: #ff616f;
+}
+.modal .close-button .fas:hover {
+  color: #b1454e;
+  cursor: pointer;
 }
 
 
