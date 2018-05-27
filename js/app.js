@@ -81,6 +81,96 @@ let twoStars = 30;
 //*                            *//
 //******************************//
 
+function leaderboardHTMLUpdate(leaderboardData) {
+  console.log("called");
+  let innerHTML = "";
+  for (let currentKeyValue in leaderboardData) {
+    if (currentKeyValue === "threeStars") {
+      innerHTML += `<i class="fas fa-star fa-2x" id="firstStar"></i><i class="fas fa-star fa-2x" id="secondStar"></i><i class="fas fa-star fa-2x" id="thirdStar"></i>`;
+    } else if (currentKeyValue === "twoStars") {
+      innerHTML += `<i class="fas fa-star fa-2x" id="firstStar"></i><i class="fas fa-star fa-2x" id="secondStar"></i><i class="far fa-star fa-2x" id="thirdStar"></i>`;
+    } else {
+      innerHTML += `<i class="fas fa-star fa-2x" id="firstStar"></i><i class="far fa-star fa-2x" id="secondStar"></i><i class="far fa-star fa-2x" id="thirdStar"></i>`;
+    }
+    innerHTML += `
+    <div class="score-rating-header">
+      <div class="name-column">
+        Player Name
+      </div>
+      <div class="time-column">
+        Player Time
+      </div>
+    </div>
+    <div class="score-rating-body">`;
+    leaderboardData[currentKeyValue].forEach(function(currentValueInside) {
+      innerHTML += `<div class="player-row">
+        <div class="name-column">
+          ${currentValueInside[0]}
+        </div>
+        <div class="time-column">
+          ${currentValueInside[1]}
+        </div>
+      </div>`;
+    });
+      innerHTML += `</div>`;
+  }
+
+  modalLeaderboardElement.querySelector(".list-container").innerHTML = innerHTML;
+}
+
+function leaderboardCheck() {
+  //leaderboard temporry data
+  let leaderboardGlobalScore = {
+    threeStars : [
+      ["Luis Jose", "1"],
+      ["Jose Carlos", "190"],
+      ["Mariela E", "210"]
+    ],
+    twoStars : [
+      ["Pedro K", "201"],
+      ["Jason R", "207"],
+      ["Mikaela W", "298"]
+    ],
+    oneStars :[
+      ["Bryan C", "333"],
+      ["Danilo M", "334"],
+      ["Josefina L", "370"]
+    ]
+  };
+
+  let gameTotalTime = (timerMinutes * 60) + timerSeconds;
+  let finded = false
+  let person;
+  if (completeMovesCounter <= threeStars) {
+
+    leaderboardGlobalScore.threeStars.forEach(function(currentValue, currentIndex, currentObject) {
+      if (finded === false) {
+        if (currentValue[1] == "--:--") {
+          person = prompt(`Your score is one of the best of our Leaderboard!!!!
+            what is the name for which you want to be known?`);
+          finded = true;
+          currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
+        } else if (currentValue[1] >= gameTotalTime) {
+          person = prompt(`Your score is one of the best of our Leaderboard!!!!
+            what is the name for which you want to be known?`);
+          finded = true;
+          currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
+        }
+      }
+
+    });
+    leaderboardGlobalScore.threeStars.splice(-1,1);
+  } else if (completeMovesCounter <= twoStars) {
+    console.log("2 stars\n " + gameTotalTime);
+  } else {
+    console.log("1 star\n " + gameTotalTime);
+  }
+
+
+
+  leaderboardHTMLUpdate(leaderboardGlobalScore);
+}
+
 function refreshGameBoard(evt) {
   clearInterval(timerCounter);
   const codeFragment = document.createDocumentFragment();
@@ -210,6 +300,7 @@ gameBoard.addEventListener("click", function(evt) {
               modalWinnerElement.querySelector("#yourTime").textContent = "Your Time: " + ("0" + timerMinutes).slice(-2) + ":" + ("0" + timerSeconds).slice(-2);
               modalWinnerElement.querySelector("#yourMoves").textContent = "Your Moves: " + completeMovesCounter;
               modalWinnerElement.querySelector(".star-rating-container").innerHTML = starsRatingElement.innerHTML;
+              leaderboardCheck();
             }
           },500);
         } else {
