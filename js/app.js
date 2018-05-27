@@ -73,7 +73,6 @@ let timerMinutes = 0;
 //the moves needed to get the stars
 let threeStars = 16;
 let twoStars = 30;
-let oneStars = 40;
 
 
 //******************************//
@@ -137,9 +136,7 @@ function refreshGameBoard(evt) {
 function starsRating() {
   completeMovesCounter ++;
   moveCounterElement.textContent = "Moves: " + completeMovesCounter;
-  if(completeMovesCounter === oneStars + 1) {
-    document.getElementById("firstStar").className = "far fa-star";
-  } else if(completeMovesCounter === twoStars + 1) {
+   if(completeMovesCounter === twoStars + 1) {
     document.getElementById("secondStar").className = "far fa-star";
   } else if(completeMovesCounter === threeStars + 1) {
     document.getElementById("thirdStar").className = "far fa-star";
