@@ -82,9 +82,10 @@ let twoStars = 30;
 //******************************//
 
 function leaderboardHTMLUpdate(leaderboardData) {
-  console.log("called");
+  //innerHTML will store all the HTML structure for the leaderboard table
   let innerHTML = "";
   for (let currentKeyValue in leaderboardData) {
+    //depending on what key itis, is the amount of stars it show
     if (currentKeyValue === "threeStars") {
       innerHTML += `<i class="fas fa-star fa-2x" id="firstStar"></i><i class="fas fa-star fa-2x" id="secondStar"></i><i class="fas fa-star fa-2x" id="thirdStar"></i>`;
     } else if (currentKeyValue === "twoStars") {
@@ -92,6 +93,7 @@ function leaderboardHTMLUpdate(leaderboardData) {
     } else {
       innerHTML += `<i class="fas fa-star fa-2x" id="firstStar"></i><i class="far fa-star fa-2x" id="secondStar"></i><i class="far fa-star fa-2x" id="thirdStar"></i>`;
     }
+    //adding header of the list
     innerHTML += `
     <div class="score-rating-header">
       <div class="name-column">
@@ -102,6 +104,7 @@ function leaderboardHTMLUpdate(leaderboardData) {
       </div>
     </div>
     <div class="score-rating-body">`;
+    //adding the value of the list
     leaderboardData[currentKeyValue].forEach(function(currentValueInside) {
       innerHTML += `<div class="player-row">
         <div class="name-column">
@@ -114,14 +117,17 @@ function leaderboardHTMLUpdate(leaderboardData) {
     });
       innerHTML += `</div>`;
   }
-
+  //printing the HTML on innerHTML to the element
   modalLeaderboardElement.querySelector(".list-container").innerHTML = innerHTML;
+  //save the content of the new JSON for the leaderboard Data
   localStorage.setItem("leaderboardData", JSON.stringify(leaderboardData));
+  //Showing the modal with the leaderboard
   modalLeaderboardElement.classList.add("active");
 }
 
 function leaderboardCheck() {
   let leaderboardGlobalScore;
+  //if not data is store in localstorabe then the variable leaderboardData will get an initial set of value
   if(localStorage.getItem("leaderboardData") === null) {
     leaderboardGlobalScore = {
       threeStars : [
@@ -140,30 +146,37 @@ function leaderboardCheck() {
         ["--", "--:--"]
       ]
     };
+    //teh info is on plain text since localStorage dont allow save objets, thats why we need convert the text to a json format
   } else {
     leaderboardGlobalScore = JSON.parse(localStorage.getItem("leaderboardData"));
   }
-
+  //total time converterd to seconds
   let gameTotalTime = (timerMinutes * 60) + timerSeconds;
+  //this variable will be true when the position of the new time is found to avoid unnesesary comparisons
   let finded = false
+  // person will store the name of the new record player
   let person;
+  //there are three if one for every posibility, three two or one star and match it with it corresponding set of value
   if (completeMovesCounter <= threeStars) {
+    //run through the array of values
     leaderboardGlobalScore.threeStars.forEach(function(currentValue, currentIndex, currentObject) {
       if (finded === false) {
         if (currentValue[1] == "--:--") {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
             what is the name for which you want to be known?`);
           finded = true;
+          //added the new value in the position of the actual set of value
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
         } else if (currentValue[1] >= gameTotalTime) {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
-            what is the name for which you want to be known?`);
+What is the name for which you want to be known?`);
           finded = true;
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
         }
       }
 
     });
+    //delete the last value of this set to just have 3 at the end
     leaderboardGlobalScore.threeStars.splice(-1,1);
   } else if (completeMovesCounter <= twoStars) {
     leaderboardGlobalScore.twoStars.forEach(function(currentValue, currentIndex, currentObject) {
@@ -202,16 +215,18 @@ function leaderboardCheck() {
     });
     leaderboardGlobalScore.oneStars.splice(-1,1);
   }
-
-
-
+  //update the leaderboard with the new values after the reorder
   leaderboardHTMLUpdate(leaderboardGlobalScore);
 }
 
 function refreshGameBoard(evt) {
+  //set the timeInterval to stop cause we need start a new one
   clearInterval(timerCounter);
+  //crewate a documentFragment to store the html that will going in the board
   const codeFragment = document.createDocumentFragment();
+  //sort randomly the order of the cards (idea from stackoverflow)
   cardFigures.sort(function(a, b){return 0.5 - Math.random()});
+  //run through all the array and create all the cards
   for (var i = 0; i < cardFigures.length; i++) {
     const newElement = document.createElement('div');
     newElement.setAttribute("class", "game-pieces-container");
@@ -223,6 +238,7 @@ function refreshGameBoard(evt) {
             <i class="fas fa-${cardFigures[i][1]} fa-4x"></i>
         </div>
       </div>`;
+      //add every single card element to the document fragment
     codeFragment.appendChild(newElement);
   }
   //set all default HTML inside the Elements
