@@ -163,57 +163,61 @@ function leaderboardCheck() {
       if (found === false) {
         if (currentValue[1] == "--:--") {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
-            what is the name for which you want to be known?`);
+What is the name for which you want to be known?`);
           found = true;
           //added the new value in the position of the actual set of value
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
+          //delete the last value of this set to just have 3 at the end
+          leaderboardGlobalScore.threeStars.splice(-1,1);
         } else if (currentValue[1] >= gameTotalTime) {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
 What is the name for which you want to be known?`);
           found = true;
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
+          //delete the last value of this set to just have 3 at the end
+          leaderboardGlobalScore.threeStars.splice(-1,1);
         }
       }
 
     });
-    //delete the last value of this set to just have 3 at the end
-    leaderboardGlobalScore.threeStars.splice(-1,1);
   } else if (completeMovesCounter <= twoStars) {
     leaderboardGlobalScore.twoStars.forEach(function(currentValue, currentIndex, currentObject) {
       if (found === false) {
         if (currentValue[1] == "--:--") {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
-            what is the name for which you want to be known?`);
+What is the name for which you want to be known?`);
           found = true;
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
+          leaderboardGlobalScore.twoStars.splice(-1,1);
         } else if (currentValue[1] >= gameTotalTime) {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
-            what is the name for which you want to be known?`);
+What is the name for which you want to be known?`);
           found = true;
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
+          leaderboardGlobalScore.twoStars.splice(-1,1);
         }
       }
 
     });
-    leaderboardGlobalScore.twoStars.splice(-1,1);
   } else {
     leaderboardGlobalScore.oneStars.forEach(function(currentValue, currentIndex, currentObject) {
       if (found === false) {
         if (currentValue[1] == "--:--") {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
-            what is the name for which you want to be known?`);
+What is the name for which you want to be known?`);
           found = true;
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
+          leaderboardGlobalScore.oneStars.splice(-1,1);
         } else if (currentValue[1] >= gameTotalTime) {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
-            what is the name for which you want to be known?`);
+What is the name for which you want to be known?`);
           found = true;
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
+          leaderboardGlobalScore.oneStars.splice(-1,1);
         }
       }
 
     });
-    leaderboardGlobalScore.oneStars.splice(-1,1);
   }
   //update the leaderboard with the new values after the reorder
   leaderboardHTMLUpdate(leaderboardGlobalScore);
