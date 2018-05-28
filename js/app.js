@@ -153,24 +153,24 @@ function leaderboardCheck() {
   //total time converterd to seconds
   let gameTotalTime = (timerMinutes * 60) + timerSeconds;
   //this variable will be true when the position of the new time is found to avoid unnesesary comparisons
-  let finded = false
+  let found = false
   // person will store the name of the new record player
   let person;
   //there are three if one for every posibility, three two or one star and match it with it corresponding set of value
   if (completeMovesCounter <= threeStars) {
     //run through the array of values
     leaderboardGlobalScore.threeStars.forEach(function(currentValue, currentIndex, currentObject) {
-      if (finded === false) {
+      if (found === false) {
         if (currentValue[1] == "--:--") {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
             what is the name for which you want to be known?`);
-          finded = true;
+          found = true;
           //added the new value in the position of the actual set of value
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
         } else if (currentValue[1] >= gameTotalTime) {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
 What is the name for which you want to be known?`);
-          finded = true;
+          found = true;
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
         }
       }
@@ -180,16 +180,16 @@ What is the name for which you want to be known?`);
     leaderboardGlobalScore.threeStars.splice(-1,1);
   } else if (completeMovesCounter <= twoStars) {
     leaderboardGlobalScore.twoStars.forEach(function(currentValue, currentIndex, currentObject) {
-      if (finded === false) {
+      if (found === false) {
         if (currentValue[1] == "--:--") {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
             what is the name for which you want to be known?`);
-          finded = true;
+          found = true;
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
         } else if (currentValue[1] >= gameTotalTime) {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
             what is the name for which you want to be known?`);
-          finded = true;
+          found = true;
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
         }
       }
@@ -198,16 +198,16 @@ What is the name for which you want to be known?`);
     leaderboardGlobalScore.twoStars.splice(-1,1);
   } else {
     leaderboardGlobalScore.oneStars.forEach(function(currentValue, currentIndex, currentObject) {
-      if (finded === false) {
+      if (found === false) {
         if (currentValue[1] == "--:--") {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
             what is the name for which you want to be known?`);
-          finded = true;
+          found = true;
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
         } else if (currentValue[1] >= gameTotalTime) {
           person = prompt(`Your score is one of the best of our Leaderboard!!!!
             what is the name for which you want to be known?`);
-          finded = true;
+          found = true;
           currentObject.splice(currentIndex, 0, [person, gameTotalTime]);
         }
       }
@@ -316,7 +316,6 @@ leaderboardCloseButtonElement.addEventListener("click", function() {
 
 // TODO: wait for click event on the GameBoard element and then flip the target card
 gameBoard.addEventListener("click", function(evt) {
-  console.log(previousCardFlipped);
   //just flip a card if there are 0 or 1 card flipped
   if(clickCounter <= 1) {
     //save the parent element of the target to work with it
