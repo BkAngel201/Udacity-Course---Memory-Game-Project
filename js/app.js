@@ -116,27 +116,33 @@ function leaderboardHTMLUpdate(leaderboardData) {
   }
 
   modalLeaderboardElement.querySelector(".list-container").innerHTML = innerHTML;
+  localStorage.setItem("leaderboardData", JSON.stringify(leaderboardData));
+  modalLeaderboardElement.classList.add("active");
 }
 
 function leaderboardCheck() {
-  //leaderboard temporry data
-  let leaderboardGlobalScore = {
-    threeStars : [
-      ["--", "--:--"],
-      ["--", "--:--"],
-      ["--", "--:--"]
-    ],
-    twoStars : [
-      ["--", "--:--"],
-      ["--", "--:--"],
-      ["--", "--:--"]
-    ],
-    oneStars :[
-      ["--", "--:--"],
-      ["--", "--:--"],
-      ["--", "--:--"]
-    ]
-  };
+  let leaderboardGlobalScore;
+  if(localStorage.getItem("leaderboardData") === null) {
+    leaderboardGlobalScore = {
+      threeStars : [
+        ["--", "--:--"],
+        ["--", "--:--"],
+        ["--", "--:--"]
+      ],
+      twoStars : [
+        ["--", "--:--"],
+        ["--", "--:--"],
+        ["--", "--:--"]
+      ],
+      oneStars :[
+        ["--", "--:--"],
+        ["--", "--:--"],
+        ["--", "--:--"]
+      ]
+    };
+  } else {
+    leaderboardGlobalScore = JSON.parse(localStorage.getItem("leaderboardData"));
+  }
 
   let gameTotalTime = (timerMinutes * 60) + timerSeconds;
   let finded = false
