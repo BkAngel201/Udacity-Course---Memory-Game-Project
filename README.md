@@ -36,7 +36,7 @@ At the beginning of the game all the cards will be face down, then you need to f
 
 - [HTML5 Local Storage](https://developer.mozilla.org/es/docs/Web/API/Window/localStorage)
 
-##Technologies Used
+## Technologies Used
 
 - HTML
 
